@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="description" content="EasyPay · SafePay: a practice app that teaches senior citizens in India to use digital payments safely and spot scams.">
+<title>EasyPay · SafePay</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="top">
+  <div class="brand"><span class="logo" aria-hidden="true">🛡️</span><div><h1>EasyPay · SafePay</h1><p class="sub" data-i18n="tagline"></p></div></div>
+  <div class="tools">
+    <div class="seg" role="group" data-i18n-aria="lang_l"><button id="lang-en" data-act="lang" data-v="en" aria-pressed="true">English</button><button id="lang-kn" data-act="lang" data-v="kn" aria-pressed="false">ಕನ್ನಡ</button></div>
+    <button class="tb" data-act="fs" data-v="-1" data-i18n-aria="fs_minus">A−</button>
+    <button class="tb" data-act="fs" data-v="1" data-i18n-aria="fs_plus">A+</button>
+    <button class="tb" data-act="theme" data-i18n-aria="theme_l">◐</button>
+  </div>
+</header>
+<p class="banner" role="note" data-i18n="demo_banner"></p>
+<nav class="nav" data-i18n-aria="nav_l">
+  <a href="#home" data-view="home"><span aria-hidden="true">🏠</span><b data-i18n="nav_home"></b></a>
+  <a href="#send" data-view="send"><span aria-hidden="true">₹</span><b data-i18n="nav_send"></b></a>
+  <a href="#scan" data-view="scan"><span aria-hidden="true">📷</span><b data-i18n="nav_scan"></b></a>
+  <a href="#alerts" data-view="alerts"><span aria-hidden="true">⚠️</span><b data-i18n="nav_alerts"></b></a>
+  <a href="#learn" data-view="learn"><span aria-hidden="true">📚</span><b data-i18n="nav_learn"></b></a>
+  <a href="#help" data-view="help"><span aria-hidden="true">☎</span><b data-i18n="nav_help"></b></a>
+</nav>
+<main id="main" tabindex="-1">
+  <div class="voicebar"><button class="btn alt" data-act="speak">🔊 <span data-i18n="read_page"></span></button><button class="btn alt" data-act="stop">⏹ <span data-i18n="stop"></span></button></div>
+
+  <section class="view" id="home" aria-labelledby="h-home">
+    <h2 id="h-home" tabindex="-1" data-i18n="hello"></h2>
+    <div class="tiles">
+      <a class="tile" href="#send"><span class="ti" aria-hidden="true">₹</span><b data-i18n="tile_send"></b><small data-i18n="tile_send_d"></small></a>
+      <a class="tile" href="#scan"><span class="ti" aria-hidden="true">📷</span><b data-i18n="tile_scan"></b><small data-i18n="tile_scan_d"></small></a>
+      <a class="tile" href="#alerts"><span class="ti" aria-hidden="true">⚠️</span><b data-i18n="tile_alerts"></b><small data-i18n="tile_alerts_d"></small></a>
+      <a class="tile" href="#help"><span class="ti" aria-hidden="true">☎</span><b data-i18n="tile_help"></b><small data-i18n="tile_help_d"></small></a>
+    </div>
+    <div class="card"><h3 data-i18n="tip_title"></h3><p id="tip" class="big"></p></div>
+    <div class="card"><h3 data-i18n="l_rules"></h3><ol id="rulesHome"></ol></div>
+  </section>
+
+  <section class="view" id="send" aria-labelledby="h-send" hidden>
+    <h2 id="h-send" tabindex="-1" data-i18n="send_title"></h2>
+    <ol class="steps" id="sendsteps"><li data-s="1" data-i18n="s1"></li><li data-s="2" data-i18n="s2"></li><li data-s="3" data-i18n="s3"></li></ol>
+    <div class="card sstep" data-s="1">
+      <label for="sName" data-i18n="rec_name"></label><input id="sName" autocomplete="off">
+      <label for="sId" data-i18n="rec_id"></label><input id="sId" autocomplete="off" autocapitalize="none" spellcheck="false">
+      <p class="err" id="e1" role="alert"></p>
+      <button class="btn" data-act="next1" data-i18n="next"></button>
+      <div class="row"><button class="btn alt" data-act="fillOk" data-i18n="sample_ok"></button><button class="btn alt" data-act="fillBad" data-i18n="sample_bad"></button></div>
+    </div>
+    <div class="card sstep" data-s="2" hidden>
+      <label for="sAmt" data-i18n="amount"></label><input id="sAmt" inputmode="numeric" autocomplete="off">
+      <label for="sNote" data-i18n="note"></label><textarea id="sNote" rows="3"></textarea>
+      <p class="err" id="e2" role="alert"></p>
+      <button class="btn" data-act="next2" data-i18n="review"></button>
+      <button class="btn alt" data-act="back" data-i18n="back"></button>
+    </div>
+    <div class="sstep" data-s="3" hidden>
+      <div class="card"><h3 data-i18n="confirm_title"></h3><dl class="sum" id="sum"></dl></div>
+      <div id="sVerdict"></div>
+      <label class="chk" id="ackWrap" hidden><input type="checkbox" id="ack"> <span data-i18n="ack_caution"></span></label>
+      <button class="btn big" id="sConfirm" data-act="confirm" data-i18n="confirm_btn"></button>
+      <a class="btn stop" id="sCall" href="tel:1930" hidden>☎ <span data-i18n="h1930"></span></a>
+      <button class="btn alt" data-act="back" data-i18n="back"></button>
+      <button class="btn alt" data-act="cancel" data-i18n="cancel"></button>
+    </div>
+    <div class="card ok-card" id="sDone" hidden><h3>✅ <span data-i18n="success"></span></h3><p data-i18n="pin_note"></p><button class="btn big" data-act="cancel" data-i18n="done_btn"></button></div>
+  </section>
+
+  <section class="view" id="scan" aria-labelledby="h-scan" hidden>
+    <h2 id="h-scan" tabindex="-1" data-i18n="scan_title"></h2>
+    <p data-i18n="scan_hint"></p>
+    <div class="cam"><video id="cam" playsinline muted></video><div class="reticle" aria-hidden="true"></div></div>
+    <p class="err" id="camErr" role="alert"></p>
+    <div class="row"><button class="btn" data-act="camStart" data-i18n="start_cam"></button><button class="btn alt" data-act="camStop" data-i18n="stop_cam"></button></div>
+    <div class="card"><label for="qrFile" data-i18n="upload_qr"></label><input type="file" id="qrFile" accept="image/*">
+      <h3 data-i18n="or_try"></h3>
+      <div class="row"><button class="btn alt" data-act="qrSample" data-v="ok" data-i18n="sample_qr_ok"></button><button class="btn alt" data-act="qrSample" data-v="bad" data-i18n="sample_qr_bad"></button></div></div>
+    <div id="qrOut" aria-live="polite"></div>
+  </section>
+
+  <section class="view" id="alerts" aria-labelledby="h-alerts" hidden>
+    <h2 id="h-alerts" tabindex="-1" data-i18n="alerts_title"></h2>
+    <p data-i18n="alerts_intro"></p>
+    <div id="demoList"></div>
+    <div class="card"><h3 data-i18n="own_msg"></h3><p class="hint" data-i18n="how_paste"></p>
+      <label for="ownText" data-i18n="paste_here"></label><textarea id="ownText" rows="4"></textarea>
+      <div class="row"><button class="btn alt" data-act="paste" data-i18n="paste_btn"></button><button class="btn" data-act="ownCheck" data-i18n="check_btn"></button></div>
+      <div id="ownOut" aria-live="polite"></div></div>
+  </section>
+
+  <section class="view" id="learn" aria-labelledby="h-learn" hidden>
+    <h2 id="h-learn" tabindex="-1" data-i18n="learn_title"></h2>
+    <div id="learnList" class="card"></div>
+    <div class="card"><h3 data-i18n="l_rules"></h3><ol id="rulesLearn"></ol></div>
+  </section>
+
+  <section class="view" id="help" aria-labelledby="h-help" hidden>
+    <h2 id="h-help" tabindex="-1" data-i18n="help_title"></h2>
+    <a class="btn stop" href="tel:1930">☎ <span data-i18n="h1930"></span></a>
+    <a class="btn alt" href="tel:14567">☎ <span data-i18n="h14567"></span></a>
+    <a class="btn alt" href="tel:112">☎ <span data-i18n="h112"></span></a>
+    <a class="btn alt" href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer">🌐 <span data-i18n="portal"></span></a>
+    <div class="card"><h3 data-i18n="lost_title"></h3><p data-i18n="lost_d"></p></div>
+    <div class="card"><h3 data-i18n="trusted_title"></h3><p class="hint" data-i18n="trusted_note"></p>
+      <ul id="tcList" class="tc"></ul>
+      <label for="tcName" data-i18n="t_name"></label><input id="tcName" autocomplete="off">
+      <label for="tcPhone" data-i18n="t_phone"></label><input id="tcPhone" inputmode="tel" autocomplete="off">
+      <p class="err" id="tcErr" role="alert"></p>
+      <button class="btn" data-act="addTc" data-i18n="add"></button></div>
+  </section>
+</main>
+<footer class="foot"><p data-i18n="footer"></p></footer>
+
+<div id="alert" role="alertdialog" aria-modal="true" aria-labelledby="al-t" aria-describedby="al-d" hidden>
+  <div class="abox"><div class="aic" id="al-i" aria-hidden="true"></div><h2 id="al-t"></h2><p id="al-d"></p><p><b id="al-a"></b></p>
+    <button class="btn alt" data-act="alertHear">🔊 <span data-i18n="hear"></span></button><button class="btn" id="al-close" data-act="alertClose" data-i18n="close"></button></div>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
